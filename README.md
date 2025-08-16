@@ -25,15 +25,20 @@ in your apache2 setup (This was used on ubuntu, find something similar in your o
 if you can't get it just text: nano `/etc/httpd/conf.d/laravel.conf`
 ```
 <VirtualHost *:80>
-    ServerAdmin webmaster@localhost
+    ServerAdmin root@localhost
+    ServerName YOUR_IP_OR_DOMAIN
     DocumentRoot /var/www/html/pwpanel/public
+
     <Directory /var/www/html/pwpanel/public>
+        Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
-    ErrorLog /var/log/httpd/laravel-error.log
-    CustomLog /var/log/httpd/laravel-access.log combined
+
+    ErrorLog /var/log/httpd/pwpanel_error.log
+    CustomLog /var/log/httpd/pwpanel_access.log combined
 </VirtualHost>
+
 ```
 save, run: `sed -i 's/^#LoadModule rewrite_module/LoadModule rewrite_module/' /etc/httpd/conf/httpd.conf`
 
